@@ -3,6 +3,7 @@ test("1 is 1", () => {
 });
 
 function getUser(id) {
+  if(id<=0) throw new Error("Invalid ID")
   return{
     id,
     email: `user${id}@test.com`
@@ -39,4 +40,14 @@ test("array", () => {
 test("string", () => {
   expect(getUser(1).email).toBe("user1@test.com")
   expect(getUser(2).email).toMatch(/.*test.com$/)
+})
+
+/* test("throw when id is non negative", () => {
+  expect(getUser(-1)).toThrow();
+  expect(getUser(-1)).toThrow("Invalid ID")
+}) */
+
+test("throw when id is non negative", () => {
+  expect(() => getUser(-1)).toThrow();
+  expect(() => getUser(-1)).toThrow("Invalid ID")
 })
